@@ -2,6 +2,7 @@ let argv = require('yargs/yargs')(process.argv.slice(2))
   .alias('a', 'add')
   .alias('c', 'complete').argv
 const fs = require('fs')
+const chalk = require('chalk')
 
 const filePath = 'tasks.json'
 
@@ -22,7 +23,7 @@ if (!tasks) tasks = []
 if (argv._[0] === 'ls' || argv._[0] === 'list')
   tasks.forEach((task, idx) => {
     if (task.done) {
-      console.log(`${idx} | ${task.name} ✓`)
+      console.log(chalk.green(`${idx} | ${task.name} ✓`))
       return
     }
     console.log(`${idx} | ${task.name}`)

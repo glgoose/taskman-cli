@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/glgoose/taskman#readme",
   "dependencies": {
+    "chalk": "^4.1.1",
     "yargs": "^17.0.1"
   }
 }
