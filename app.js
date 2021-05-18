@@ -1,4 +1,7 @@
-let argv = require('yargs/yargs')(process.argv.slice(2)).alias('a', 'add').argv
+let argv = require('yargs/yargs')(process.argv.slice(2))
+  .alias('a', 'add')
+  .alias('rm', 'remove')
+  .alias('c', 'complete', 'done').argv
 const fs = require('fs')
 const { access } = require('node:fs')
 
@@ -25,13 +28,18 @@ if (argv.add) {
   tasks.push({ name: argv.add, done: false })
 }
 
-// store tasks
-const storeTasks = tasks => {
-  try {
-    fs.writeFileSync(filePath, JSON.stringify(tasks))
-  } catch (err) {
-    console.log(err)
-  }
+if (argv.delete) {
+  tasks.splice(argv.delete, 1)
 }
+
+if (argv.complete)
+  // store tasks
+  const storeTasks = tasks => {
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(tasks))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 storeTasks(tasks)
