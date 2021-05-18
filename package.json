@@ -1,0 +1,22 @@
+{
+  "name": "taskman",
+  "version": "1.0.0",
+  "description": "BeCode assignment to create simple CRUD task manager",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glgoose/taskman.git"
+  },
+  "author": "Glenn Goossens <glgoose@pm.me>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glgoose/taskman/issues"
+  },
+  "homepage": "https://github.com/glgoose/taskman#readme",
+  "dependencies": {
+    "yargs": "^17.0.1"
+  }
+}
