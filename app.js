@@ -26,7 +26,7 @@ if (argv.add) tasks.push({ name: argv.add, done: false })
 
 if (argv._[0] === 'rm' || argv._[0] === 'remove') tasks.splice(argv._[1], 1)
 
-if (argv.done) tasks[argv.done].done = true
+if (argv.complete) tasks[argv.complete].done = true
 
 // store tasks
 const storeTasks = tasks => {
