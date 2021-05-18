@@ -20,7 +20,13 @@ if (!tasks) tasks = []
 
 // command arguments
 if (argv._[0] === 'ls' || argv._[0] === 'list')
-  tasks.forEach((task, idx) => console.log(`${idx} | ${task.name}`))
+  tasks.forEach((task, idx) => {
+    if (task.done) {
+      console.log(`${idx} | ${task.name} ✓`)
+      return
+    }
+    console.log(`${idx} | ${task.name}`)
+  })
 
 if (argv.add) tasks.push({ name: argv.add, done: false })
 
