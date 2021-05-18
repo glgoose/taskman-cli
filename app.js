@@ -1,22 +1,37 @@
 let argv = require('yargs/yargs')(process.argv.slice(2)).alias('a', 'add').argv
 const fs = require('fs')
+const { access } = require('node:fs')
 
-const tasks = ['task1', 'task2']
+const filePath = 'tasks.json'
 
-if (argv._[0] === 'ls' || argv._[0] === 'list') {
-  console.log(tasks.join('\n'))
-}
-
-if (argv.a || argv.add) {
-  tasks.push(argv.a)
-}
-
-const saveTasks = tasks => {
+const loadTasks = () => {
   try {
-    fs.writeFileSync('tasks.json', JSON.stringify(tasks))
+    const file = fs.readFileSync(filePath, 'utf8')
+    return JSON.parse(file)
+  } catch (err) {
+    return false // file doesn't exist
+  }
+}
+
+let tasks = loadTasks()
+if (!tasks) tasks = []
+
+// command arguments
+if (argv._[0] === 'ls' || argv._[0] === 'list') {
+  tasks.forEach((task, idx) => console.log(`${idx} | ${task.name}`))
+}
+
+if (argv.add) {
+  tasks.push({ name: argv.add, done: false })
+}
+
+// store tasks
+const storeTasks = tasks => {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(tasks))
   } catch (err) {
     console.log(err)
   }
 }
 
-saveTasks(tasks)
+storeTasks(tasks)
